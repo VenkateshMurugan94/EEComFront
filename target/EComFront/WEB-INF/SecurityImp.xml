@@ -1,0 +1,31 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security.xsd">
+	<security:http auto-config="true">
+		<security:form-login login-page="/Login"
+			default-target-url="/" login-processing-url="/perform_login"
+			username-parameter="user_name" password-parameter="user_password"
+			authentication-success-forward-url="/loginsuccess"
+			authentication-failure-url="/flogin" />
+		<security:csrf disabled="true" />
+
+		<security:logout logout-success-url="/"
+			logout-url="/logout" invalidate-session="true" />
+
+	</security:http>
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:jdbc-user-service
+				data-source-ref="datasource"
+				users-by-username-query="select emailId,password,true as status from UserCredential where emailId=?"
+				authorities-by-username-query="select emailId,role from UserCredential where emailId=?" />
+		</security:authentication-provider>
+	</security:authentication-manager>
+</beans>
