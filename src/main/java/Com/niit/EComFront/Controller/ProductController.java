@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import Com.niit.EComBack.DAO.CategoryDAO;
 import Com.niit.EComBack.DAO.ProductDAO;
-import Com.niit.EComBack.model.Category;
 import Com.niit.EComBack.model.Product;
 
 @Controller
